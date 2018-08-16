@@ -1,0 +1,4 @@
+{:require  [arvocmd.app]
+ :init-fns [arvocmd.app/init]
+ :boot-reload {:on-jsload arvocmd.app/init}
+ :compiler-options {:asset-path "js/app.out"}}
