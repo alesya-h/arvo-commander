@@ -27,7 +27,7 @@
  cljs {:compiler-options {:target :nodejs
                           :install-deps true
                           :npm-deps {"react" "16.2.0"
-                                     "react-dom" "16.2.0"
+                                     "react-dom" "16.2.1"
                                      "create-react-class" "15.6.3"
                                      "fs-plus" "3.1.1"
 
