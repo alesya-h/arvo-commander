@@ -1,25 +1,19 @@
 (ns arvocmd.state
-  (:require [reagent.core :as r]
-            [historian.core :as hist]))
+  (:require
+   [reagent.core :as r]
+   [lentes.core :as l]
+   [historian.core :as hist]))
 
 (defonce state (r/atom {}))
 
-(defn update-state! [f & args]
-  (apply swap! state f args))
+(defn substate-atom [k]
+  (l/derive (l/key k) state))
 
-(defn update-key! [k f & args]
-  (apply swap! state update k f args))
+(defn subsubstate-atom [derived-state k]
+  (l/derive (l/key k) derived-state))
 
-(defn update-in-state! [path f & args]
-  (apply swap! state update-in path f args))
-
-(defn set-in-state! [path value]
-  (update-in-state! path assoc key value))
-
-(defn get-key [& args]
-  (get-in @state args))
-
-(defn set-key! [key value]
-  (update-state! assoc key value))
+(defn get-current-state [] @state)
 
 (hist/record! state :state)
+(def undo! hist/undo!)
+(def redo! hist/redo!)
